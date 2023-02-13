@@ -5,7 +5,7 @@ import com.devsuperior.movieflix.entities.Movie;
 public class MovieDTO {
     private Long id;
     private String title;
-    private String subtitle;
+    private String subTitle;
     private Integer year;
     private String imgUrl;
     private String synopsis;
@@ -15,10 +15,10 @@ public class MovieDTO {
     public MovieDTO() {
     }
 
-    public MovieDTO(Long id, String title, String subtitle, Integer year, String imgUrl, String synopsis, GenreDTO genre) {
+    public MovieDTO(Long id, String title, String subTitle, Integer year, String imgUrl, String synopsis, GenreDTO genre) {
         this.id = id;
         this.title = title;
-        this.subtitle = subtitle;
+        this.subTitle = subTitle;
         this.year = year;
         this.imgUrl = imgUrl;
         this.synopsis = synopsis;
@@ -28,7 +28,7 @@ public class MovieDTO {
     public MovieDTO(Movie entity, GenreDTO genreDto) {
         id = entity.getId();
         title = entity.getTitle();
-        subtitle = entity.getSubTitle();
+        subTitle = entity.getSubTitle();
         year = entity.getYear();
         imgUrl = entity.getImgUrl();
         synopsis = entity.getSynopsis();
@@ -51,12 +51,12 @@ public class MovieDTO {
         this.title = title;
     }
 
-    public String getSubtitle() {
-        return subtitle;
+    public String getSubTitle() {
+        return subTitle;
     }
 
-    public void setSubtitle(String subtitle) {
-        this.subtitle = subtitle;
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 
     public Integer getYear() {
