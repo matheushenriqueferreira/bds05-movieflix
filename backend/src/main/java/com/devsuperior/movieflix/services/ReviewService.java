@@ -7,8 +7,11 @@ import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.entities.User;
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.repositories.ReviewRepository;
+import com.devsuperior.movieflix.services.exceptions.DatabaseException;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,7 +29,7 @@ public class ReviewService {
     @Autowired
     private AuthService authService;
 
-
+    @PreAuthorize("hasRole('MEMBER')")
     @Transactional
     public ReviewDTO insert(ReviewDTO dto) {
         try {
@@ -38,8 +41,8 @@ public class ReviewService {
 
             return new ReviewDTO(entity, entity.getMovie().getId(), new UserDTO(entity.getUser()));
         }
-        catch (EntityNotFoundException e) {
-            throw new ResourceNotFoundException("Movie not found");
+        catch (DataIntegrityViolationException e) {
+            throw new DatabaseException("Integrity violation, movieId = " + dto.getMovieId() + " does not exist");
         }
     }
 }
