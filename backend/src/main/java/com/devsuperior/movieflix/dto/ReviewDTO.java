@@ -9,7 +9,7 @@ public class ReviewDTO {
 
     private Long id;
 
-    @NotBlank(message = "Campo requerido")
+    @NotBlank(message = "Não é permitido texto vazio na avaliação")
     private String text;
 
     private Long movieId;
