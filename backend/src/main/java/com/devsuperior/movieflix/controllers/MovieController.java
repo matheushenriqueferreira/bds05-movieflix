@@ -4,7 +4,6 @@ import com.devsuperior.movieflix.dto.MovieDTO;
 import com.devsuperior.movieflix.dto.MovieMinDTO;
 import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.services.MovieService;
-import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -12,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/movies")
@@ -27,7 +27,7 @@ public class MovieController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<MovieMinDTO>> findbyGenre(
+    public ResponseEntity<Page<MovieMinDTO>> findByGenre(
             @RequestParam(value = "genreId", defaultValue = "0") Long genreId,
             Pageable pageable) {
 
